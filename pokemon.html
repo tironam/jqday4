@@ -4,51 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
 <body>
 
-    <div id="pokemonCard"></div>
-    
+    <form>
+        <div class="form-group">
+            <label for="name" id="name">Pokemon Name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <button type="search" id="searchPokemon" class="btn btn-primary">Search</button>
+    </form>
+
+        <div class="row">
+            <div id="pokemonCard1" class="col-sm-4"></div>
+            <div id="pokemonCard2" class="col-sm-4"></div>
+            <div id="pokemonCard3" class="col-sm-4"></div>
+        </div>
+
     <script>
 
-        fetch('https://pokeapi.co/api/v2/pokemon/6')
-            .then(r => r.json())
-            .then(pokemon => {
-                console.log(pokemon)
-                document.getElementById('pokemonCard').innerHTML = `
+        document.getElementById('searchPokemon').addEventListener('click', event => {
+            event.preventDefault()
+            console.log(document.getElementById('name').value)
+
+            fetch(`https://pokeapi.co/api/v2/pokemon/${document.getElementById('name').value}`)
+                .then(r => r.json())
+                .then(pokemon => {
+                    console.log(pokemon)
+                    document.getElementById('pokemonCard1').innerHTML = `
                 <div class="card" style="width: 18rem;">
-                    <img src="${pokemon.sprites.front_default}" class="card-img-top" alt="${pokemon.name}">
-                    <div class="card-body">
-                        <h4 class="card-text">
+                    <img 
+                        src="${pokemon.sprites.front_default}" 
+                        class="card-img-top" 
+                        alt="${pokemon.name}">
+                    <div class="card-body bg-primary">
+                        <h2 class="card-text text-center">
                         ${pokemon.name}
-                        </h4>
+                        </h2>
                         <p>
                         Weight: ${pokemon.weight}
                         </p>
                         <h4>Stats:</h4>
-                        <p>
-                        ${pokemon.stats[0].stat.name}: ${pokemon.stats[0].base_stat}
-                        </p>
-                        <p>
-                        ${pokemon.stats[1].stat.name}: ${pokemon.stats[0].base_stat}
-                        </p>
-                        <p>
-                        ${pokemon.stats[2].stat.name}: ${pokemon.stats[0].base_stat}
-                        </p>
-                        <p>
-                        ${pokemon.stats[3].stat.name}: ${pokemon.stats[0].base_stat}
-                        </p>
-                        <p>
-                        ${pokemon.stats[4].stat.name}: ${pokemon.stats[0].base_stat}
-                        </p>
-                        <p>
-                        ${pokemon.stats[5].stat.name}: ${pokemon.stats[0].base_stat}
-                        </p>
+                        <ul class="list-group">
+                               <li class=list-group-item>
+                                ${pokemon.stats[0].stat.name}: ${pokemon.stats[0].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[1].stat.name}: ${pokemon.stats[1].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[2].stat.name}: ${pokemon.stats[2].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[3].stat.name}: ${pokemon.stats[3].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[4].stat.name}: ${pokemon.stats[4].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[5].stat.name}: ${pokemon.stats[5].base_stat}
+                                </li>
+                        </ul>
                     </div>
                 </div>
                 `
-            })
-            .catch(e => console.log(e))
+                })
+                .catch(e => console.log(e))
+
+            fetch('https://pokeapi.co/api/v2/pokemon/8')
+                .then(r => r.json())
+                .then(pokemon => {
+                    console.log(pokemon)
+                    document.getElementById('pokemonCard2').innerHTML = `
+                <div class="card" style="width: 18rem;">
+                    <img 
+                        src="${pokemon.sprites.front_default}" 
+                        class="card-img-top" 
+                        alt="${pokemon.name}">
+                    <div class="card-body bg-primary">
+                        <h2 class="card-text  text-center">
+                        ${pokemon.name}
+                        </h2>
+                        <p>
+                        Weight: ${pokemon.weight}
+                        </p>
+                        <h4>Stats:</h4>
+                        <ul class="list-group">
+                               <li class=list-group-item>
+                                ${pokemon.stats[0].stat.name}: ${pokemon.stats[0].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[1].stat.name}: ${pokemon.stats[1].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[2].stat.name}: ${pokemon.stats[2].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[3].stat.name}: ${pokemon.stats[3].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[4].stat.name}: ${pokemon.stats[4].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[5].stat.name}: ${pokemon.stats[5].base_stat}
+                                </li>
+                        </ul>
+                    </div>
+                </div>
+                `
+                })
+                .catch(e => console.log(e))
+
+            fetch('https://pokeapi.co/api/v2/pokemon/9')
+                .then(r => r.json())
+                .then(pokemon => {
+                    console.log(pokemon)
+                    document.getElementById('pokemonCard3').innerHTML = `
+                <div class="card" style="width: 18rem;">
+                    <img 
+                        src="${pokemon.sprites.front_default}" 
+                        class="card-img-top" 
+                        alt="${pokemon.name}">
+                    <div class="card-body bg-primary">
+                        <h2 class="card-text  text-center">
+                        ${pokemon.name}
+                        </h2>
+                        <p>
+                        Weight: ${pokemon.weight}
+                        </p>
+                        <h4>Stats:</h4>
+                        <ul class="list-group">
+                               <li class=list-group-item>
+                                ${pokemon.stats[0].stat.name}: ${pokemon.stats[0].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[1].stat.name}: ${pokemon.stats[1].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[2].stat.name}: ${pokemon.stats[2].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[3].stat.name}: ${pokemon.stats[3].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[4].stat.name}: ${pokemon.stats[4].base_stat}
+                                </li>
+                               <li class=list-group-item>
+                                ${pokemon.stats[5].stat.name}: ${pokemon.stats[5].base_stat}
+                                </li>
+                        </ul>
+                    </div>
+                </div>
+                `
+                })
+                .catch(e => console.log(e))
+        })
+
+        
 
     </script>
 
