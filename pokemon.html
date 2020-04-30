@@ -35,9 +35,10 @@
 
             document.getElementById('searchPokemon').addEventListener('click', event => {
                 event.preventDefault()
-                console.log(document.getElementById('name').value)
+                
+                if (document.getElementById('searchPokemon').addEventListener()
 
-                fetch(`https://pokeapi.co/api/v2/pokemon/${document.getElementById('name').value}/`)
+                fetch(`https://pokeapi.co/api/v2/pokemon/${document.getElementById('name').value.toLowerCase()}/`)
                     .then(r => r.json())
                     .then(pokemon => {
                         console.log(pokemon)
@@ -75,9 +76,18 @@
                             </ul>
                             </div>
                     `
+                    // clears out the pokemon name after you search
+                    document.getElementById('name').value = ''
+                    // clears out the search box
+                    document.getElementById('pokemon').innerHTML = ''
                     document.getElementById('pokemon').append(pokeElem)
                     })
-                    .catch(e => console.log(e))
+                    .catch(e => console.log(e => {
+                        console.log(e)
+                        alert('Pokemon not found')
+                        document.getElementById('name').value =''
+                        document.getElementById(pokemon).innerHTML = ''
+                    })
 
             })
 
