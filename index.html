@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+    
+    <div id="person" class=""></div>
+
+    <script>
+
+        fetch('https://swapi.py4e.com/api/people/1')
+            .then(r => r.json())
+            // Where the data will actually go
+            .then(person => {
+                console.log(person)
+                fetch(person.homeworld)
+                    .then(r => r.json())
+                    .then(homeworld => {
+                        console.log(homeworld)
+                        document.getElementById('person').innerHTML = `
+                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Star Wars Character</div>
+                        <div class="card-body">
+                            <h5 class="card-title">${person.name}</h5>
+                                <p class="card-text">They have ${person.hair_color} hair and ${person.eye_color} eyes</p>
+                                 <p>
+                                They're from the planet ${homeworld.name}.
+                                </p>
+                `
+                    })
+                    .catch(e => console.log(e))
+            })
+            .catch(e => console.log(e))
+
+    </script>
+
+</body>
+</html>
